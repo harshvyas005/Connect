@@ -25,9 +25,9 @@ const Navigation = () => {
   };
   const handleLogout = () => {
     console.log("logout");
-    dispatch(logout()); // Ensure logout action is invoked
-    setAnchorEl(null); // Close the menu
-    navigate("/"); // Navigate to the login page
+    dispatch(logout());
+    setAnchorEl(null);
+    navigate("/");
   };
 
   return (
@@ -68,7 +68,7 @@ const Navigation = () => {
                 display: "inline-block",
               }}
               variant="contained"
-              type="submit" // Add submit type to the button
+              type="submit"
             >
               Tweet
             </Button>

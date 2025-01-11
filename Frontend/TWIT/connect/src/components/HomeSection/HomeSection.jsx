@@ -26,7 +26,6 @@ const HomeSection = () => {
   const [openEmoji, setOpenEmoji] = useState(false);
 
   const handleOpenEmoji = () => setOpenEmoji(!openEmoji);
-  // const handleCloseEmoji = () => setOpenEmoji(false);
 
   const handleSubmit = (values, actions) => {
     dispatch(createTweet(values));
@@ -79,7 +78,7 @@ const HomeSection = () => {
   const handleEmojiClick = (value) => {
     const { emoji } = value;
     formik.setFieldValue("content", formik.values.content + emoji);
-    setOpenEmoji(false); // Close emoji picker after emoji is selected
+    setOpenEmoji(false); 
   };
 
   return (

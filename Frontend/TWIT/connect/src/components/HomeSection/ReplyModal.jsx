@@ -12,7 +12,6 @@ import TagFacesIcon from "@mui/icons-material/TagFaces";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { createReply } from "../../Store/Twit/Action";
-// import { useEffect } from "react";
 
 const style = {
   position: "absolute",
@@ -28,7 +27,12 @@ const style = {
   borderRadius: 4,
 };
 
-export default function ReplyModal({ open: isModalOpen, handleClose, twitdata,updateReplyCount  }) {
+export default function ReplyModal({
+  open: isModalOpen,
+  handleClose,
+  twitdata,
+  updateReplyCount,
+}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const navigate = useNavigate();
@@ -43,9 +47,6 @@ export default function ReplyModal({ open: isModalOpen, handleClose, twitdata,up
     actions.resetForm();
     console.log("handle submit", values);
   };
-  // useEffect(() => {
-  //   console.log("ReplyModal Props - isModalOpen:", isModalOpen, "Item:", item);
-  // }, [isModalOpen, item]);
 
   const formik = useFormik({
     initialValues: {
@@ -102,11 +103,7 @@ export default function ReplyModal({ open: isModalOpen, handleClose, twitdata,up
             </div>
           </div>
 
-          <Box
-            component="form"
-            sx={{ mt: 2 }}
-            onSubmit={formik.handleSubmit} // Attach Formik's handleSubmit directly
-          >
+          <Box component="form" sx={{ mt: 2 }} onSubmit={formik.handleSubmit}>
             <section className={`pb-10`}>
               <div className="flex space-x-5">
                 <Avatar alt="username" src={auth.user?.image} />
@@ -162,7 +159,7 @@ export default function ReplyModal({ open: isModalOpen, handleClose, twitdata,up
                           display: "inline-block",
                         }}
                         variant="contained"
-                        type="submit" // Ensure this is set to submit
+                        type="submit"
                       >
                         Tweet
                       </Button>

@@ -11,11 +11,7 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import TweetCard from "../HomeSection/TweetCard";
 
-import {
-  findUserbyId,
-  followUserAction,
-  getUserProfile,
-} from "../../Store/Auth/Action";
+import { findUserbyId, followUserAction } from "../../Store/Auth/Action";
 import ProfileModal from "./ProfileModal";
 import {
   getUsersTweets,
@@ -38,26 +34,11 @@ const Profile = () => {
   const handleOpenProfileModel = () => setOpenProfileModal(true);
   const handleCloseProfileModel = () => setOpenProfileModal(false);
   const userProfile = auth.findUser || {};
-  // console.log("param id:",param.id);
-  // console.log("auth.finduser:",userProfile)
-  // const profileImage =
-  //   auth.findUser?.image ||
-  //   "https://via.placeholder.com/150?text=Profile+Image";
-  // const backgroundImage =
-  //   auth.findUser?.backgroundImage ||
-  //   "https://via.placeholder.com/1500x500?text=Background+Image";
-  // const location = auth.findUser?.location;
-
-  // const follower = auth.findUser?.followers.length;
-
-  // const following = auth.findUser?.followings.length;
-  // const handleTabChange = (event, newValue) => setTabValue(newValue);
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
     if (newValue === 4) {
       console.log("Fetching liked tweets for user ID:", param.id);
       dispatch(findTwitsByLikesContainUser(param.id));
-      // console.log("Fetching tweets for user ID:", param.id);
     } else if (newValue === 1) {
       dispatch(getUsersTweets(param.id));
       console.log("param id:", param.id);
@@ -68,8 +49,6 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    // dispatch(getUsersTweets(param.id));
-    // dispatch(findTweetsByLikesContainsUser(param.id));
     console.log("Current Profile ID: ", param.id);
     dispatch(findUserbyId(param.id));
   }, [param.id]);
@@ -82,13 +61,6 @@ const Profile = () => {
     fullName = "Unknown User",
     image = "",
     bio = "This user has no bio.",
-    backgroundImage = "",
-    location = "",
-    followers = [],
-    followings = [],
-    req_user = false,
-    verified = false,
-    mobile = "",
   } = user;
 
   return (
@@ -135,7 +107,7 @@ const Profile = () => {
               onClick={handleFollowUser}
               sx={{ borderRadius: "20px" }}
               variant="outlined"
-              disabled={auth.following} // Add a flag in Redux for better UX
+              disabled={auth.following}
             >
               {auth.findUser?.followed ? "Unfollow" : "Follow"}
             </Button>
@@ -195,7 +167,7 @@ const Profile = () => {
             </Box>
             <TabPanel value="1">
               {twit.twits
-                ?.filter((tweet) => tweet.user.id.toString() === param.id) // Ensure param.id matches tweet.user.id
+                ?.filter((tweet) => tweet.user.id.toString() === param.id)
                 .map((item) => (
                   <TweetCard key={item.id} twit={item} />
                 ))}
@@ -204,24 +176,18 @@ const Profile = () => {
             <TabPanel value="3">No media available</TabPanel>
             <TabPanel value="4">
               {twit.likedTwits
-                ?.filter((tweet) => tweet.user.id.toString() === param.id) // Filter liked tweets by user ID
+                ?.filter((tweet) => tweet.user.id.toString() === param.id)
                 .map((item) => (
-                  <TweetCard key={item.id} twit={item} /> // Render the filtered liked tweets
+                  <TweetCard key={item.id} twit={item} />
                 ))}
-                
-            
-                {twit.twits
-                ?.filter((tweet) => tweet.liked) // Ensure param.id matches tweet.user.id
+
+              {twit.twits
+                ?.filter((tweet) => tweet.liked)
                 .map((item) => (
                   <TweetCard key={item.id} twit={item} />
                 ))}
               {console.log("liked Tweets to display:", twit.likedTwits)}
-            </TabPanel> 
-             {/* {twit.twits
-                ?.filter((tweet)=>{
-                  if(tweet.liked)
-                    console.log(tweet)
-                }) } */}
+            </TabPanel>
           </TabContext>
         </Box>
       </section>

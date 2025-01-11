@@ -32,7 +32,7 @@ const features = [
 ];
 
 export default function SubscriptionModal({ handleClose, open }) {
-  const [plan, setPlan] = React.useState("yearly"); // Default to 'yearly' plan
+  const [plan, setPlan] = React.useState("yearly");
   const dispatch = useDispatch();
   const { auth } = useSelector((store) => store);
   const navigate = useNavigate();
@@ -40,10 +40,9 @@ export default function SubscriptionModal({ handleClose, open }) {
   const makePayment = () => {
     console.log("Selected plan:", plan);
     dispatch(makePaymentAction(plan)).then((response) => {
-      // Assuming `response.data.orderId` contains the orderId
       const orderId = response?.data?.orderId;
       if (orderId) {
-        navigate(`/verifiedSuccess?orderId=${orderId}`); // Redirect with the orderId
+        navigate(`/verifiedSuccess?orderId=${orderId}`);
       } else {
         console.error("Order ID not found in response");
       }
@@ -85,7 +84,7 @@ export default function SubscriptionModal({ handleClose, open }) {
             {/* Plan Toggle */}
             <div className="flex justify-between items-center border rounded-full px-4 py-2 border-gray-300">
               <button
-                onClick={() => setPlan("yearly")} // Updated to 'yearly' to match backend expectations
+                onClick={() => setPlan("yearly")}
                 className={`flex-1 text-center font-medium py-1 rounded-full ${
                   plan === "yearly" ? "text-blue-600" : "text-gray-500"
                 }`}
@@ -94,7 +93,7 @@ export default function SubscriptionModal({ handleClose, open }) {
                 <span className="text-green-500 text-sm">Save 12%</span>
               </button>
               <button
-                onClick={() => setPlan("monthly")} // Updated to 'monthly' to match backend expectations
+                onClick={() => setPlan("monthly")}
                 className={`flex-1 text-center font-medium py-1 rounded-full ${
                   plan === "monthly" ? "text-blue-600" : "text-gray-500"
                 }`}
@@ -128,7 +127,7 @@ export default function SubscriptionModal({ handleClose, open }) {
                   px: 4,
                   "&:hover": { bgcolor: "gray.800" },
                 }}
-                onClick={makePayment} // Trigger payment when clicked
+                onClick={makePayment}
               >
                 <span className="line-through text-gray-400 mr-2">
                   ₹7,800.00

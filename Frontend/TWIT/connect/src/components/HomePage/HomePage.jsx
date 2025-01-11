@@ -8,7 +8,7 @@ import Profile from "../Profile/Profile";
 import TweetDetails from "../TweetDetails/TweetDetails";
 import Authentication from "../Authentication/Authentication";
 import { useSelector } from "react-redux";
-import "../../App.css"; // Go up two levels to access the App.css
+import "../../App.css"; 
 import Notification from "../Navigation/Notification";
 import Explore from "../Navigation/Explore";
 import Message from "../Navigation/Message";
@@ -24,9 +24,9 @@ const HomePage = () => {
   return (
     <div
       style={{
-        minHeight: "100vh", // Full screen height
-        backgroundColor: theme.currentTheme === "dark" ? "#121212" : "#ffffff", // Dark or light theme background
-        color: theme.currentTheme === "dark" ? "#ffffff" : "#000000", // Adjust text color
+        minHeight: "100vh",
+        backgroundColor: theme.currentTheme === "dark" ? "#121212" : "#ffffff", 
+        color: theme.currentTheme === "dark" ? "#ffffff" : "#000000", 
       }}
     >
       <Grid

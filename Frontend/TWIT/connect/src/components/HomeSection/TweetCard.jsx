@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { createReTweet, deleteTweet, likeTweet } from "../../Store/Twit/Action";
 import ReplyModal from "./ReplyModal";
 import "../../App.css";
-// import { formatDistanceToNow } from "date-fns";
 
 const TweetCard = ({ twit }) => {
   const navigate = useNavigate();
@@ -26,31 +25,12 @@ const TweetCard = ({ twit }) => {
   );
   const [retwit, setRetwit] = useState(twit.totalRetwits || 0);
   const [replyCount, setReplyCount] = useState(twit.totalReplies || 0);
-  // const [reply, setReplies] = useState(twit.totalReplies || 0);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openReplyModal, setOpenReplyModal] = useState(false);
 
   const updateReplyCount = (newCount) => {
     setReplyCount(newCount);
   };
-
-  // const timeAgo = formatDistanceToNow(new Date("2024-12-27T12:00:00Z"), {
-  //   addSuffix: true,
-  // });
-  // console.log("CreatedAt:", twit.createdAt);
-
-  // const {
-  //   liked = false,
-  //   totalLikes = 0,
-  //   totalRetweets = 0,
-  //   retwitUsersId = [],
-  //   user = {},
-  //   content = "",
-  //   image = null,
-  //   createdAt = null,
-  //   totalReplies = 0,
-  // } = twit || {};
-
   const openMenu = Boolean(anchorEl);
 
   const handleMenuClick = (event) => {
@@ -66,13 +46,6 @@ const TweetCard = ({ twit }) => {
     console.log("Delete tweet");
     handleMenuClose();
   };
-
-  // useEffect(() => {
-  //   setRetwit(twit.totalRetweets || 0);
-  //   setReplies(twit.totalReplies || 0);
-  // }, [twit.totalRetweets, twit.totalReplies]);
-  // console.log("(count of retwit and replies)Tweet data:", twit);
-
   const handleLikeTweet = async (num) => {
     try {
       dispatch(likeTweet(twit.id));
@@ -84,25 +57,17 @@ const TweetCard = ({ twit }) => {
   };
 
   const handleCreateRetweet = () => {
-    // Toggle the retweet status and update count
     if (isRetwit) {
-      // Un-retweet: decrease the count
       setRetwit(retwit - 1);
     } else {
-      // Retweet: increase the count
       setRetwit(retwit + 1);
     }
-
-    // Dispatch the action to create or delete the retweet on the backend
     dispatch(createReTweet(twit.id));
-
-    // Toggle the isRetwit state
     setIsRetwit(!isRetwit);
   };
 
   const handleReplyModalOpen = () => setOpenReplyModal(true);
   const handleReplyModalClose = () => {
-    // setReplies(reply + 1); // Update reply count after submitting a reply
     setOpenReplyModal(false);
   };
   return (
@@ -174,11 +139,6 @@ const TweetCard = ({ twit }) => {
                 className="w-[28rem] border rounded-md"
               />
             )}
-            {/* {item.video && (
-              <div className="flex flex-col items-center border rounded-md">
-                <video controls src={item.video} className="max-h-[40rem]"></video>
-              </div>
-            )} */}
           </div>
 
           {/* Actions */}

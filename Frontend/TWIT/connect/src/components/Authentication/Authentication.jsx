@@ -4,10 +4,9 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import AuthModal from "./AuthModal";
 
 const Authentication = () => {
-  const [openAuthModal,setOpenAuthModal]=useState(false);
-  const handleOpenAuthModal=()=>setOpenAuthModal(true);
-  const handleCloseAuthModal=()=>setOpenAuthModal(false);
-
+  const [openAuthModal, setOpenAuthModal] = useState(false);
+  const handleOpenAuthModal = () => setOpenAuthModal(true);
+  const handleCloseAuthModal = () => setOpenAuthModal(false);
 
   return (
     <div className="relative min-h-screen">
@@ -34,7 +33,6 @@ const Authentication = () => {
           </div>
         </Grid>
 
-        {/* Right Section */}
         <Grid
           item
           xs={12}
@@ -84,8 +82,8 @@ const Authentication = () => {
           </div>
         </Grid>
       </Grid>
-      <AuthModal open={openAuthModal} handleClose={handleCloseAuthModal}/>
-    </div>  
+      <AuthModal open={openAuthModal} handleClose={handleCloseAuthModal} />
+    </div>
   );
 };
 

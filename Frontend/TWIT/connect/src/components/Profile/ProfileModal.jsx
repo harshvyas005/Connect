@@ -22,8 +22,8 @@ const style = {
   p: 4,
   outline: "none",
   borderRadius: 4,
-  maxHeight: "90vh", // Added to ensure modal does not overflow the viewport
-  overflowY: "auto", // Ensures scrolling within the modal
+  maxHeight: "90vh",
+  overflowY: "auto",
 };
 
 export default function ProfileModal({ open: isModalOpen, handleClose }) {
@@ -39,43 +39,18 @@ export default function ProfileModal({ open: isModalOpen, handleClose }) {
   };
   const handleImageChange = async (event) => {
     setUploading(true);
-    const { name } = event.target; // "backgroundImage" or "image"
+    const { name } = event.target;
     const file = event.target.files[0];
 
     try {
-      const url = await uploadToCloudnary(file, name); // Upload based on the field name
-      formik.setFieldValue(name, url); // Set the field dynamically using the `name` attribute
+      const url = await uploadToCloudnary(file, name);
+      formik.setFieldValue(name, url);
     } catch (error) {
       console.error("Image upload failed:", error);
     } finally {
       setUploading(false);
     }
   };
-
-  // const formik = useFormik({
-  //   initialValues: {
-  //     fullName: "",
-  //     website: "",
-  //     location: "",
-  //     bio: "",
-  //     backgroundImage: "",
-  //     image: "",
-  //   },
-  //   onSubmit: handleSubmit,
-  // });
-
-  // useEffect(() => {
-  //   console.log("Setting Formik values with updated user:", auth.user);
-  //   formik.setValues({
-  //     fullName: auth.user.fullName || "",
-  //     website: auth.user.website || "",
-  //     location: auth.user.location || "",
-  //     bio: auth.user.bio || "",
-  //     backgroundImage: auth.user.backgroundImage || "",
-  //     image: auth.user.image || "",
-
-  //   });
-  // }, [auth.user]);
 
   const formik = useFormik({
     initialValues: {
@@ -87,15 +62,13 @@ export default function ProfileModal({ open: isModalOpen, handleClose }) {
       image: auth.user.image || "",
       mobile: auth.user.mobile || "",
     },
-    enableReinitialize: true, // Important to reinitialize when props change
+    enableReinitialize: true,
     onSubmit: handleSubmit,
   });
 
   useEffect(() => {
     console.log("Formik Values After Update:", formik.values);
   }, [formik.values]);
-
-  // console.log("Formik Values:", formik.values);
 
   return (
     <div>
@@ -107,7 +80,6 @@ export default function ProfileModal({ open: isModalOpen, handleClose }) {
       >
         <Box sx={style}>
           <form onSubmit={formik.handleSubmit}>
-            {/* MARKED CHANGE: Fixed Header Section */}
             <div className="flex items-center justify-between mb-4">
               <IconButton onClick={handleClose}>
                 <CloseIcon />
@@ -118,12 +90,10 @@ export default function ProfileModal({ open: isModalOpen, handleClose }) {
               </Button>
             </div>
 
-            {/* MARKED CHANGE: Scrollable Content */}
             <div
               className="hideScrollBar overflow-auto"
               style={{ maxHeight: "70vh" }}
             >
-              {/* MARKED CHANGE: Background Image Section */}
               <React.Fragment>
                 <div className="relative mb-4">
                   <img
@@ -132,11 +102,11 @@ export default function ProfileModal({ open: isModalOpen, handleClose }) {
                       "https://via.placeholder.com/1500x500?text=Background+Image"
                     }
                     alt="background"
-                    className="w-full h-48 object-cover rounded-md" // Image styling
+                    className="w-full h-48 object-cover rounded-md"
                   />
                   <input
                     type="file"
-                    className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" // File input overlay
+                    className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
                     onChange={handleImageChange}
                     name="backgroundImage"
                   />
@@ -161,7 +131,6 @@ export default function ProfileModal({ open: isModalOpen, handleClose }) {
                 </div>
               </React.Fragment>
 
-              {/* MARKED CHANGE: Form Section */}
               <div className="space-y-4">
                 <TextField
                   fullWidth

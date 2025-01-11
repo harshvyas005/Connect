@@ -31,7 +31,7 @@ const VerifiedSuccess = () => {
       dispatch(verifiedAccountAction(orderId));
     } else {
       console.error("Order ID is missing in URL");
-      navigate("/"); // Redirect if no orderId
+      navigate("/");
     }
   }, [dispatch, urlParams, navigate]);
 

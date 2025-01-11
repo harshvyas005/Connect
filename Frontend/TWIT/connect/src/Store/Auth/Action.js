@@ -79,23 +79,9 @@ export const loginUser = (loginData) => async (dispatch) => {
   } catch (error) {
     console.log("login error", error);
     dispatch(loginFailure(error.message || "An error occurred during login."));
-    // console.error("Login Error:", error.response?.data || error.message);
   }
 };
-// export const loginWithGoogleAction = (data) => async (dispatch) => {
-//   dispatch({type:GOOGLE_LOGIN_REQUEST});
-//   try {
-//     const response = await axios.post(`${API_BASE_URL}/auth/signin/google`, data);
-//     const user = response.data;
-//     console.log("login with google user -: ", user);
-//     if (user.jwt) {
-//       localStorage.setItem("jwt", user.jwt);
-//     }
-//     dispatch({type:GOOGLE_LOGIN_SUCCESS,payload:user.jwt});
-//   } catch (error) {
-//     dispatch({type:GOOGLE_LOGIN_FAILURE, payload: error.message || "An error occurred during login."});
-//   }
-// };
+
 export const registerUser = (registerData) => async (dispatch) => {
   dispatch(registerRequest());
   try {
@@ -172,7 +158,9 @@ export const followUserAction = (userId) => async (dispatch) => {
 export const searchUser = (query, userId) => async (dispatch) => {
   dispatch({ type: SEARCH_USER_REQUEST });
   try {
-    const response = await api.get(`/api/users/search/${userId}?query=${query}`);
+    const response = await api.get(
+      `/api/users/search/${userId}?query=${query}`
+    );
     const users = response.data;
     console.log("search result -: ", users);
 
